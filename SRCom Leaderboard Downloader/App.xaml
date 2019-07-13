@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:SRCom_Leaderboard_Downloader"
              StartupUri="Views/MainWindowView.xaml">
     <Application.Resources>
-         
+
     </Application.Resources>
 </Application>

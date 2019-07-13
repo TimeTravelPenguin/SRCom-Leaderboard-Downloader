@@ -17,7 +17,7 @@ namespace SRCom_Leaderboard_Downloader.Models
 
         private string _region;
 
-        private ObservableCollection<RunModel> _runs;
+        private ObservableCollection<RunDataModel> _runs;
 
         private string _timing;
 
@@ -79,7 +79,7 @@ namespace SRCom_Leaderboard_Downloader.Models
             set => SetValue(ref _timing, value);
         }
 
-        public ObservableCollection<RunModel> Runs
+        public ObservableCollection<RunDataModel> Runs
         {
             get => _runs;
             set => SetValue(ref _runs, value);
@@ -87,16 +87,51 @@ namespace SRCom_Leaderboard_Downloader.Models
 
         public LeaderboardModel()
         {
+            Runs = new ObservableCollection<RunDataModel>();
+            SetDefaults();
+        }
+
+        private void SetDefaults()
+        {
             Category = "";
             Emulators = null;
             Game = "";
             Level = "";
             Platform = "";
             Region = "";
-            Runs = new ObservableCollection<RunModel>();
+            Runs.Clear();
             Timing = "realtime";
             VideoOnly = false;
             WebLink = @"https://www.speedrun.com/";
+        }
+
+        internal void UpdateData(LeaderboardModel leaderboardModel)
+        {
+            Category = leaderboardModel.Category;
+            Emulators = leaderboardModel.Emulators;
+            Game = leaderboardModel.Game;
+            Level = leaderboardModel.Level;
+            Platform = leaderboardModel.Platform;
+            Region = leaderboardModel.Region;
+            Timing = leaderboardModel.Timing;
+            VideoOnly = leaderboardModel.VideoOnly;
+            WebLink = leaderboardModel.WebLink;
+
+            Runs.Clear();
+            foreach (var run in leaderboardModel.Runs)
+            {
+                Runs.Add(new RunDataModel
+                {
+                    Place = run.Place,
+                    Player = new PlayerModel
+                    {
+                        Rel = run.Player.Rel,
+                        ID = run.Player.ID,
+                        Name = run.Player.Name,
+                        Uri = run.Player.Uri
+                    }
+                });
+            }
         }
     }
 }
