@@ -123,13 +123,10 @@ namespace SRCom_Leaderboard_Downloader.Models
                 Runs.Add(new RunDataModel
                 {
                     Place = run.Place,
-                    Player = new PlayerModel
-                    {
-                        Rel = run.Player.Rel,
-                        ID = run.Player.ID,
-                        Name = run.Player.Name,
-                        Uri = run.Player.Uri
-                    }
+                    Name = run.Name,
+                    ID = run.ID,
+                    Rel = run.Rel,
+                    Uri = run.Uri
                 });
             }
         }

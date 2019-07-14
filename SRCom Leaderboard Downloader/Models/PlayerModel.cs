@@ -5,14 +5,15 @@ namespace SRCom_Leaderboard_Downloader.Models
     public class PlayerModel : PropertyChangedBase
     {
         private string _id;
-        private string _name;
-        private string _rel;
-        private string _url;
+        private NamesModel _names;
+        private RegionModel _region;
+        private string _role;
+        private string _webLink;
 
-        public string Rel
+        public string Role
         {
-            get => _rel;
-            set => SetValue(ref _rel, value);
+            get => _role;
+            set => SetValue(ref _role, value);
         }
 
         public string ID
@@ -21,24 +22,31 @@ namespace SRCom_Leaderboard_Downloader.Models
             set => SetValue(ref _id, value);
         }
 
-        public string Name
+        public NamesModel Names
         {
-            get => _name;
-            set => SetValue(ref _name, value);
+            get => _names;
+            set => SetValue(ref _names, value);
         }
 
-        public string Uri
+        public string WebLink
         {
-            get => _url;
-            set => SetValue(ref _url, value);
+            get => _webLink;
+            set => SetValue(ref _webLink, value);
+        }
+
+        public RegionModel Region
+        {
+            get => _region;
+            set => SetValue(ref _region, value);
         }
 
         public PlayerModel()
         {
-            Rel = null;
+            Role = null;
             ID = null;
-            Name = null;
-            Uri = null;
+            Names = new NamesModel();
+            WebLink = null;
+            Region = new RegionModel();
         }
     }
 }

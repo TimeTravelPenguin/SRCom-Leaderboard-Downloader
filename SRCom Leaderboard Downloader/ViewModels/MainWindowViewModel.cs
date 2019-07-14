@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Net;
 using System.Windows;
@@ -17,6 +18,8 @@ namespace SRCom_Leaderboard_Downloader.ViewModels
         private LeaderboardModel _leaderboard = new LeaderboardModel();
 
         private ICollectionView _leaderboardCollection;
+
+        private ObservableCollection<OutputModel> _outputCollection;
 
         public ActionCommand CommandTempFunction { get; }
 
@@ -37,6 +40,12 @@ namespace SRCom_Leaderboard_Downloader.ViewModels
         {
             get => _downloadEnabled;
             set => SetValue(ref _downloadEnabled, value);
+        }
+
+        public ObservableCollection<OutputModel> OutputCollection
+        {
+            get => _outputCollection;
+            set => SetValue(ref _outputCollection, value);
         }
 
         public MainWindowViewModel()
@@ -63,8 +72,11 @@ namespace SRCom_Leaderboard_Downloader.ViewModels
             client.DownloadStringCompleted += (sender, e) =>
             {
                 var pageSourceCode = e.Result;
+                Clipboard.SetText(pageSourceCode);
 
-                Leaderboard.UpdateData(JsonConvert.DeserializeObject<LeaderboardModel>(pageSourceCode));
+                SRComData data = JsonConvert.DeserializeObject<SRComData>(pageSourceCode);
+               // Leaderboard.UpdateData(data);
+
                 RefreshLeaderboardView();
 
                 MessageBox.Show($"Done! String length: {pageSourceCode.Length}");
@@ -73,6 +85,13 @@ namespace SRCom_Leaderboard_Downloader.ViewModels
             };
 
             client.DownloadStringAsync(uri);
+        }
+
+        private void ConstructCollection()
+        {
+            OutputCollection.Clear();
+
+
         }
     }
 }

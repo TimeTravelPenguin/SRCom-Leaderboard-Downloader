@@ -69,7 +69,11 @@
       <SubType>Designer</SubType>
     </Page>
     <Compile Include="Models\LeaderboardModel.cs" />
+    <Compile Include="Models\NamesModel.cs" />
+    <Compile Include="Models\OutputModel.cs" />
+    <Compile Include="Models\RegionModel.cs" />
     <Compile Include="Models\RunDataModel.cs" />
+    <Compile Include="Models\SRComData.cs" />
     <Compile Include="Models\VideoLinkModel.cs" />
     <Compile Include="Models\PlayerModel.cs" />
     <Compile Include="Models\RunModel.cs" />
